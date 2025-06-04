@@ -2,7 +2,7 @@ package org.example.data;
 
 public class RSSBSocialSecurityData {
     private String employeeId;
-    private String employerName;
+    private String employeeName;
     private double ContributionAmount;
 
 public RSSBSocialSecurityData(){

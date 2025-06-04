@@ -1,6 +1,5 @@
 package org.example.db;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import org.example.data.NIDAIdentityData;
 import org.example.data.RRATaxData;
 import org.example.data.RSSBSocialSecurityData;
@@ -17,7 +16,7 @@ public class DatabaseManager {
     private String password ="kaitare";
 
     public void insertRRATaxData(List<RRATaxData> data) throws SQLException {
-        String sql = "INSERT INTO rra_tax_data (taxpayer_id, name,tax_amoutn,payment_status) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO rra_tax_data (taxpayer_id, name,tax_amount,payment_status) VALUES (?,?,?,?)";
         try(Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement pstmt = conn.prepareStatement(sql)){
                 for(RRATaxData item :data){
@@ -45,12 +44,12 @@ public class DatabaseManager {
             pstmt.executeBatch();
         }
     }
-    public void insertRSSBSocialSecurityData(List<RSSBSocialSecurityData> data)throws SQLException{
-        String sql ="INSERT INTO rssb_social_security_data(employee_id, employee_name,contribution_amount VALUES(?,?,?,?)";
-        try(Connection conn = DriverManager.getConnection(url,user,password);
-                    PreparedStatement pstmt = conn.prepareStatement(sql)){
-            for(RSSBSocialSecurityData item:data){
-                pstmt.setString(1,item.getEmployeeId());
+    public void insertRSSBSocialSecurityData(List<RSSBSocialSecurityData> data) throws SQLException {
+        String sql = "INSERT INTO rssb_social_security_data (employee_id, employer_name, contribution_amount) VALUES (?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (RSSBSocialSecurityData item : data) {
+                pstmt.setString(1, item.getEmployeeId());
                 pstmt.setString(2, item.getEmployeeName());
                 pstmt.setDouble(3, item.getContributionAmount());
                 pstmt.addBatch();
@@ -59,4 +58,3 @@ public class DatabaseManager {
         }
     }
 }
-

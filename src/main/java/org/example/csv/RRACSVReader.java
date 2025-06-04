@@ -20,7 +20,7 @@ public List<RRATaxData> readCSV(String filePath) throws IOException{
                 RRATaxData data = new RRATaxData();
                 data.setTaxpayerId(values[0]);
                 data.setName(values[1]);
-                data.setTaxAmount(Double.parseDouble(values[3]));
+                data.setTaxAmount(Double.parseDouble(values[2]));
                 data.setPaymentStatus(values[3]);
                 dataList.add(data);
             }
